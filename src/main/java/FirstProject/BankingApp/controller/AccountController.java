@@ -6,10 +6,9 @@ import FirstProject.BankingApp.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/accounts")       /// base url
@@ -25,7 +24,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    /// Add account Rest Api====> first we need to make method and then we ll make that method rest api using spring annotation
+    /// Add account Rest Api ====> first we need to make method and then we ll make that method rest api using spring annotation
 
     @PostMapping
     public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto accountDto) {
@@ -54,6 +53,13 @@ public class AccountController {
         /// The first argument is the body of the response (the newly created AccountDto returned from the service layer).
         /// The second argument, HttpStatus.CREATED, is a standard HTTP status code (201). By explicitly setting this status,
         /// the server informs the client that the request was successfully fulfilled and resulted in the creation of a new resource.
+    }
+
+    /// get account Rest Api
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id){
+      AccountDto accountDto = accountService.getAccountById(id);
+      return ResponseEntity.ok(accountDto);
     }
 
 

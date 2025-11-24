@@ -26,6 +26,15 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(savedAccount);
     }
 
+    @Override
+    public AccountDto getAccountById(Long id) {
+
+        Account account = accountRepo
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+        return AccountMapper.mapToAccountDto(account);
+    }
+
     /// CREATE ACCOUNT METHOD TO CONVERT THE ACCOUNT DTO INTO ACCOUNT JPA ENTITY
     /// AND THEN SAVE THE JPA ENTITY INTO DATA BASE             ===================>>>> CONVERSION LOGIC(MAPPER)
 
