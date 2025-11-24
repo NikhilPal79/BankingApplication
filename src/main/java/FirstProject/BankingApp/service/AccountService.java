@@ -11,5 +11,7 @@ public interface AccountService {
     AccountDto getAccountById(Long id );
     /// Long id ===> parameter
 
+    AccountDto deposit(Long id, Double amount);
+
 
 }
